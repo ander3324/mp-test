@@ -18,6 +18,12 @@ import com.mercadopago.resources.datastructures.preference.Item;
 public class MercadoPagoController {
 
 	/*
+	 * Datos para crear un pago de prueba, provistos por Mercado Pago
+	 * La primera tarjeta de crédito es una prueba de 'Pago Aprobado'
+	 * La segunda es una prueba de 'Pago rechazado'
+	 * 
+	 * La url para acceder a este método es 'localhost:8080/createAndRedirect'
+	 *
 	 * Sandbox Credit Card:
 	 * 
 	 * State: APROVED Type: Mastercard Number: 5031755734530604 CVV: 123 Expire at:
@@ -34,8 +40,10 @@ public class MercadoPagoController {
 		preference.setBackUrls(new BackUrls().setFailure("http://localhost:8080/failure")
 				.setPending("http://localhost:8080/pending").setSuccess("http://localhost:8080/success"));
 
+		//Aquíe se crea un item del pago, o una colección de 
+		//items, que se pueden enviar como parámetro del método createAndRedirect()...
 		Item item = new Item();
-		item.setTitle("Test Item").setQuantity(1).setUnitPrice((float) 75.56);
+		item.setTitle("Cerveza Patagonia").setQuantity(1).setUnitPrice((float) 650.99);
 		preference.appendItem(item);
 
 		var result = preference.save();
